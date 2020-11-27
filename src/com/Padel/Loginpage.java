@@ -20,29 +20,28 @@ public class Loginpage extends Application {
     //gör bakgrundsbilden transparent.
 
     @Override
-    public void start(Stage primaryStage)  {
+    public void start(Stage primaryStage) {
 
 
         GridPane gp = new GridPane();
         gp.setAlignment(Pos.TOP_CENTER);
         gp.setVgap(5);
         gp.setHgap(5);
-        gp.setPadding(new Insets(25,25,25,25));
+        gp.setPadding(new Insets(25, 25, 25, 25));
 
 
-        gp.setBackground(new Background(new BackgroundImage(img, BackgroundRepeat.REPEAT,BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT
+        gp.setBackground(new Background(new BackgroundImage(img, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT
                 , BackgroundSize.DEFAULT)));
 
         Text username = new Text();
         username.setText("Användarnamn:");
-        username.setFont(Font.font ("Verdana",  13));
+        username.setFont(Font.font("Verdana", 13));
         username.setFill(Color.WHITESMOKE);
-
 
 
         Text password = new Text();
         password.setText("Lösenord: ");
-        password.setFont(Font.font ("Verdana",  13));
+        password.setFont(Font.font("Verdana", 13));
         password.setFill(Color.WHITESMOKE);
 
 
@@ -66,7 +65,7 @@ public class Loginpage extends Application {
         btns.setAlignment(Pos.CENTER);
         btns.setSpacing(10);
         btns.setMaxWidth(200);
-        
+
 
         VBox usernamePassword = new VBox();
         usernamePassword.setMaxWidth(200);
@@ -77,13 +76,13 @@ public class Loginpage extends Application {
 
 
         usernamePassword.getChildren().addAll(username, user, password, pw);
-        gp.add(usernamePassword, 0,0);
+        gp.add(usernamePassword, 0, 0);
 
-        gp.add(btns, 0,2);
-        gp.add(frgtPassword,0,6);
+        gp.add(btns, 0, 2);
+        gp.add(frgtPassword, 0, 6);
 
 
-        Scene sc = new Scene(gp, 640,426);
+        Scene sc = new Scene(gp, 640, 426);
 
         primaryStage.setResizable(false);
         gp.setGridLinesVisible(false);
