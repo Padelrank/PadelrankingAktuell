@@ -48,6 +48,9 @@ public class Loginpage extends Application {
         HBox btns = new HBox();
         Button login = new Button();
         login.setText("Logga In");
+        login.setOnMouseClicked(event -> {
+            profilsida.launch();
+        });
 
 
         Button register = new Button();
