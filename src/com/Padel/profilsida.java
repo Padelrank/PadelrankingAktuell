@@ -9,6 +9,7 @@ import javafx.scene.shape.Circle;
 import javafx.application.Application;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
@@ -23,6 +24,7 @@ public class profilsida extends Application {
     VBox pointsAndRank;
 
     TextField beskrivning;
+    TextFlow descFlow;
 
     BorderPane mainLayout;
     BorderPane middleLayout;

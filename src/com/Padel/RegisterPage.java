@@ -13,12 +13,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class RegisterPage {
 
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    SQLConnector connector = new SQLConnector();
+    Connection conn;
 
 
     RegisterPage() {
@@ -27,6 +28,8 @@ public class RegisterPage {
     }
 
     void display(Stage stage) {
+        CheckConnection();
+
         GridPane info = new GridPane();
         info.setGridLinesVisible(false);
         Button insertPic = new Button("Lägg till profilbild");
@@ -109,7 +112,7 @@ public class RegisterPage {
         File pic = fileChooser.showOpenDialog(st);
     }
 
-    void registerUser(String fName, String eName, String eMail, String userName, String password)  {
+    void registerUser(String fName, String eName, String eMail, String userName, String password) {
         new User(fName.toUpperCase(), eName.toUpperCase(), eMail, userName, password);
     }
 
@@ -128,6 +131,7 @@ public class RegisterPage {
         return losen.length() >= 6;
 
     }
+
     public static boolean siffror(String password) {
 
 
@@ -139,6 +143,7 @@ public class RegisterPage {
         }
         return antalSiffror >= 1;
     }
+
     public static boolean upperCase(String password) {
 
         int bokstaver = 0;
@@ -152,7 +157,20 @@ public class RegisterPage {
 
     public static boolean kontroll(String password) {
 
-        return eligiblePassword(password) && upperCase(password) &&  siffror(password);
+        return eligiblePassword(password) && upperCase(password) && siffror(password);
     }
 
+    public void CheckConnection() {
+        conn = SqlConnection.DbConnector();
+        if (conn == null) {
+            System.out.println("Connection failed");
+        } else {
+            System.out.println("Connection successful");
+        }
+
+    }
+
+
 }
+
+
