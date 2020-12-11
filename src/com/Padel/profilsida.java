@@ -3,12 +3,14 @@ package com.Padel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.application.Application;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
@@ -23,6 +25,7 @@ public class profilsida extends Application {
     VBox pointsAndRank;
 
     TextField beskrivning;
+    TextFlow descFlow;
 
     BorderPane mainLayout;
     BorderPane middleLayout;
@@ -52,8 +55,8 @@ public class profilsida extends Application {
 
         personalDescription = new Text();
         personalDescription.setText("Jag heter jan borg och har spelat padel i snart 6 år.\n" +
-                "när jag spelar föredrar jag att spela backhand\n" +
-                "men kan även spela forehand.\nspelar helst med och mot någon med mer än 1500poäng");
+                "När jag spelar föredrar jag att spela backhand\n" +
+                "men kan även spela forehand.\nSpelar helst med och mot någon med mer än 1500poäng");
         personalDescription.setFont(Font.font("Verdana", 20));
 
 
@@ -64,7 +67,7 @@ public class profilsida extends Application {
 
         panel.setAlignment(Pos.CENTER);
         panel.setBackground(new Background(new BackgroundFill(Color.FIREBRICK, CornerRadii.EMPTY, new Insets(5, 15, 15, 15))));
-
+// änra röda panelen till något snyggare, såg bättre ut i paint :P
         rubrik = new Text(500, 85, "Padelrank");
         rubrik.setFont(Font.font("Verdana", 100));
         rubrik.setFill(Color.BLACK);
@@ -102,7 +105,7 @@ public class profilsida extends Application {
         });
 
         meny = new ComboBox();
-        meny.setMaxWidth(80f);
+        meny.setMaxWidth(80);
         meny.getItems().add("Startsida");
         meny.getItems().add("Min profil");
         meny.getItems().add("Ranking");
@@ -124,7 +127,7 @@ public class profilsida extends Application {
 
 
         BorderPane.setAlignment(rank, Pos.CENTER);
-
+        primaryStage.getIcons().add(new Image("com/Padel/RacketStartPage.png"));
         Scene profil = new Scene(mainLayout, 1500, 800);
         primaryStage.setScene(profil);
         primaryStage.show();
