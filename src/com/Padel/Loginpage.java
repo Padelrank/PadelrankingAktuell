@@ -4,10 +4,12 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -16,11 +18,17 @@ import javafx.stage.Stage;
 
 public class Loginpage extends Application {
 
+    PasswordField pw;
+    TextField user;
+
+
+
+
     private final Image img = new Image("com/Padel/LoginPadelV2.jpg");
     //gör bakgrundsbilden transparent.
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage stage) {
 
 
         GridPane gp = new GridPane();
@@ -49,7 +57,19 @@ public class Loginpage extends Application {
         Button login = new Button();
         login.setText("Logga In");
         login.setOnMouseClicked(event -> {
-            profilsida.launch();
+            Alert error = new Alert(Alert.AlertType.ERROR);
+
+
+
+            if ((user.getText().equals("1")) && (pw.getText().equals("1"))) {
+                profilsida pf = new profilsida();
+                pf.showProfilePage(stage);
+            } else {
+                error.setTitle("Misslyckad inloggning");
+                error.setHeaderText("Fel lösenord");
+                error.show();
+            }
+
         });
 
 
@@ -57,7 +77,7 @@ public class Loginpage extends Application {
         register.setText("Registrera");
         register.setOnMouseClicked(event -> {
             RegisterPage rp = new RegisterPage();
-            rp.display(primaryStage);
+            rp.display(stage);
 
         });
 
@@ -74,8 +94,8 @@ public class Loginpage extends Application {
         usernamePassword.setMaxWidth(200);
         usernamePassword.setSpacing(5);
 
-        PasswordField pw = new PasswordField();
-        TextField user = new TextField();
+        pw = new PasswordField();
+        user = new TextField();
 
 
         usernamePassword.getChildren().addAll(username, user, password, pw);
@@ -87,13 +107,13 @@ public class Loginpage extends Application {
 
         Scene sc = new Scene(gp, 640, 426);
 
-        primaryStage.setResizable(false);
+        stage.setResizable(false);
         gp.setGridLinesVisible(false);
 
-        primaryStage.getIcons().add(new Image("com/Padel/RacketStartPage.png"));
-        primaryStage.setTitle("Padelrank");
-        primaryStage.setScene(sc);
-        primaryStage.show();
+        stage.getIcons().add(new Image("com/Padel/RacketStartPage.png"));
+        stage.setTitle("Padelrank");
+        stage.setScene(sc);
+        stage.show();
     }
 
 

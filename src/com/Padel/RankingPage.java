@@ -22,31 +22,30 @@ import javafx.scene.text.*;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 
-public class RankingPage extends Application {
+public class RankingPage{
 
     public TableView<Person> table = new TableView<Person>();
-    public final ObservableList<Person> data =
-            FXCollections.observableArrayList(
-                    new Person(110001, "Fernando Belasteguin", 1705),
-                    new Person(110002, "Pablo Lima", 1445),
-                    new Person(110003, "Javi Rico", 1335),
-                    new Person(110004, "Coki Nieto", 1475),
-                    new Person(110005, "Sanyo Gutierrez", 1570),
-                    new Person(110006, "Franco Stupaczuk", 1530),
-                    new Person(110007, "Augustin Tapia", 1440),
-                    new Person(110008, "Paquito Navarro", 1535),
-                    new Person(110009, "Juan Martin Diaz", 1275),
-                    new Person(110010, "Maxi Sanchez", 1470),
-                    new Person(110011, "Mati Diaz", 1230),
-                    new Person(110012, "Martin Dinenno", 1140)
-            );
+    public final ObservableList<Person> data = FXCollections.observableArrayList();
 
-    public static void main(String[] args) {
-        launch(args);
+    RankingPage(){
+
     }
 
-    @Override
-    public void start(Stage primaryStage) {
+   public void showRankingPage(Stage stage){
+
+        data.setAll(new Person(110001, "Fernando Belasteguin", 1705),
+                new Person(110002, "Pablo Lima", 1445),
+                new Person(110003, "Javi Rico", 1335),
+                new Person(110004, "Coki Nieto", 1475),
+                new Person(110005, "Sanyo Gutierrez", 1570),
+                new Person(110006, "Franco Stupaczuk", 1530),
+                new Person(110007, "Augustin Tapia", 1440),
+                new Person(110008, "Paquito Navarro", 1535),
+                new Person(110009, "Juan Martin Diaz", 1275),
+                new Person(110010, "Maxi Sanchez", 1470),
+                new Person(110011, "Mati Diaz", 1230),
+                new Person(110012, "Martin Dinenno", 1140));
+
 
         // Rubrik
         Text text1 = new Text("Rankinglista");
@@ -127,9 +126,9 @@ public class RankingPage extends Application {
  */
 
         Scene scene = new Scene(pane, 640, 426);
-        primaryStage.setTitle("Rankinglista");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        stage.setTitle("Rankinglista");
+        stage.setScene(scene);
+        stage.show();
 
     }
 }
