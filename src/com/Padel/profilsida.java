@@ -15,7 +15,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
-public class profilsida extends Application {
+public class profilsida {
 
 
     Text firstNameLastName;
@@ -46,12 +46,12 @@ public class profilsida extends Application {
     ComboBox<String> meny;
 
 
+    profilsida(){
+    }
+
+
     ProgressBar rank;
-
-
-    @Override
-    public void start(Stage primaryStage) {
-        mainLayout = new BorderPane();
+    public void showProfilePage(Stage stage){
 
 
 
@@ -149,11 +149,12 @@ public class profilsida extends Application {
         meny = new ComboBox();
 
         meny.setMaxWidth(80);
+        meny.setPromptText("Meny");
         meny.getItems().add("Startsida");
         meny.getItems().add("Min profil");
         meny.getItems().add("Ranking");
         meny.getItems().add("Kalender");
-        meny.setPromptText("Meny");
+        meny.getItems().add("Rankingsida");
         meny.setPrefSize(80, 20);
 
 
@@ -164,7 +165,7 @@ public class profilsida extends Application {
         calendar = new Button();
         calendar.setText("Kalender");
         calendar.setOnMouseClicked(event -> {
-            Calendar c = new Calendar(primaryStage);
+            Calendar c = new Calendar(stage);
         });
 
 
@@ -177,21 +178,20 @@ public class profilsida extends Application {
         rankPanel.getChildren().addAll(score, rank);
 
         panel.getChildren().addAll(meny, rubrik, redigera);
+        mainLayout = new BorderPane();
         mainLayout.setTop(panel);
         mainLayout.setCenter(middleLayout);
         //mainLayout.setRight(pointsAndRank);
 
-       // BorderPane.setAlignment(pane, Pos.CENTER);
+        //BorderPane.setAlignment(pane, Pos.CENTER);
 
 
         BorderPane.setAlignment(rank, Pos.CENTER);
-        primaryStage.getIcons().add(new Image("com/Padel/RacketStartPage.png"));
+        stage.getIcons().add(new Image("com/Padel/RacketStartPage.png"));
         Scene profil = new Scene(mainLayout, 1500, 800);
-        primaryStage.setScene(profil);
-        primaryStage.show();
+        stage.setScene(profil);
+        stage.show();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+
 }
