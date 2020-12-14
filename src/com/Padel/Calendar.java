@@ -10,8 +10,8 @@ import java.time.LocalDate;
 
 public class Calendar {
 
-    Calendar(){
-
+    Calendar(Stage stage){
+        displayCalendar(stage);
     }
     void displayCalendar(Stage stage){
         VBox vbox = new VBox(20);
