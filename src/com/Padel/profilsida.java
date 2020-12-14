@@ -25,19 +25,25 @@ public class profilsida extends Application {
     VBox personalData;
     VBox pointsAndRank;
 
+
     TextField beskrivning;
     TextFlow descFlow;
+
+    Text rankScore;
 
     BorderPane mainLayout;
     BorderPane middleLayout;
 
+    double prefWidth = 250;
+    double prefHeight = 250;
 
     Button redigera;
+    Button calendar;
 
     HBox rankPanel;
     HBox panel;
 
-    ComboBox meny;
+    ComboBox<String> meny;
 
 
     ProgressBar rank;
@@ -50,7 +56,7 @@ public class profilsida extends Application {
 
 
         middleLayout = new BorderPane();
-        middleLayout.setPadding(new Insets(100,100,100,100));
+        middleLayout.setPadding(new Insets(100,50,100,50));
         middleLayout.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, new Insets(5, 15, 5, 15))));
 
         /*
@@ -72,12 +78,17 @@ public class profilsida extends Application {
         besk.setWrapText(true);
 
 
+
         String valfri = new String("Jag heter jan borg och har spelat padel i snart 6 år. när jag spelar föredrar jag att spela backhand men kan även spela forehand. spelar helst med och mot någon med mer än 1500poäng");
-        besk.setPrefWidth(200);
-        besk.setPrefHeight(200);
+        besk.setPrefWidth(prefWidth);
+        besk.setPrefHeight(prefHeight);
+        besk.setPrefColumnCount(100);
+        besk.setPrefRowCount(100);
         besk.setText(valfri);
         besk.setEditable(false);
         HBox knapp = new HBox();
+        knapp.setPadding(new Insets(0,5,5,58));
+        knapp.setSpacing(0.5f);
         Button edit = new Button("Edit");
         Button save = new Button("Save");
         edit.setOnMouseClicked(e ->{
@@ -116,6 +127,7 @@ public class profilsida extends Application {
 
 
 
+
         rankPanel = new HBox();
         rankPanel.setAlignment(Pos.CENTER);
         score = new Text("Score: ");
@@ -135,10 +147,12 @@ public class profilsida extends Application {
         });
 
         meny = new ComboBox();
+
         meny.setMaxWidth(80);
         meny.getItems().add("Startsida");
         meny.getItems().add("Min profil");
         meny.getItems().add("Ranking");
+        meny.getItems().add("Kalender");
         meny.setPromptText("Meny");
         meny.setPrefSize(80, 20);
 
@@ -147,13 +161,27 @@ public class profilsida extends Application {
 
         beskrivning = new TextField();
 
+        calendar = new Button();
+        calendar.setText("Kalender");
+        calendar.setOnMouseClicked(event -> {
+            Calendar c = new Calendar(primaryStage);
+        });
 
+
+        rankScore = new Text();
+        rankScore.setText("1575 Poäng");
+        rankScore.setFont(Font.font("Verdana", 40));
+
+        pointsAndRank.getChildren().addAll(rankScore, calendar);
 
         rankPanel.getChildren().addAll(score, rank);
 
         panel.getChildren().addAll(meny, rubrik, redigera);
         mainLayout.setTop(panel);
         mainLayout.setCenter(middleLayout);
+        //mainLayout.setRight(pointsAndRank);
+
+       // BorderPane.setAlignment(pane, Pos.CENTER);
 
 
         BorderPane.setAlignment(rank, Pos.CENTER);
