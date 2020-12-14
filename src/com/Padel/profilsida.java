@@ -2,6 +2,7 @@ package com.Padel;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -52,7 +53,7 @@ public class profilsida extends Application {
         middleLayout.setPadding(new Insets(100,100,100,100));
         middleLayout.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, new Insets(5, 15, 5, 15))));
 
-
+        /*
         personalDescription = new Text();
         personalDescription.setText("Jag heter jan borg och har spelat padel i snart 6 år.\n" +
                 "När jag spelar föredrar jag att spela backhand\n" +
@@ -60,6 +61,35 @@ public class profilsida extends Application {
         personalDescription.setFont(Font.font("Verdana", 20));
 
 
+         */
+
+        VBox pane = new VBox();
+        pane.setPrefSize(200,200);
+        pane.setMinHeight(200);
+        pane.setMaxSize(200,200);
+        VBox mitten = new VBox();
+        TextArea besk = new TextArea();
+        besk.setWrapText(true);
+
+
+        String valfri = new String("Jag heter jan borg och har spelat padel i snart 6 år. när jag spelar föredrar jag att spela backhand men kan även spela forehand. spelar helst med och mot någon med mer än 1500poäng");
+        besk.setPrefWidth(200);
+        besk.setPrefHeight(200);
+        besk.setText(valfri);
+        besk.setEditable(false);
+        HBox knapp = new HBox();
+        Button edit = new Button("Edit");
+        Button save = new Button("Save");
+        edit.setOnMouseClicked(e ->{
+            besk.setEditable(true);
+        });
+        save.setOnMouseClicked(e ->{
+            besk.setEditable(false);
+        });
+        mitten.getChildren().add(besk);
+        knapp.getChildren().addAll(edit, save);
+
+        pane.getChildren().addAll(mitten, knapp);
 
 
         panel = new HBox();
@@ -95,7 +125,7 @@ public class profilsida extends Application {
         personalData = new VBox();
         personalData.getChildren().add(firstNameLastName);
         middleLayout.setLeft(personalData);
-        middleLayout.setCenter(personalDescription);
+        middleLayout.setCenter(pane);
         middleLayout.setRight(pointsAndRank);
         middleLayout.setBottom(rankPanel);
 
