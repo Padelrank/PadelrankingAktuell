@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.collections.ObservableList; 
 import javafx.scene.Group; 
 import javafx.scene.Scene;
+import javafx.scene.control.DialogPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage; 
 import javafx.scene.text.Font;
@@ -101,7 +102,7 @@ public class score extends Application {
 	      secondDesc.setText("Loser!"); 
 	      
 	      //Creating a Group object  
-	      Group root = new Group(); 
+	      DialogPane root = new DialogPane();
 	       
 	      //Retrieving the observable list object 
 	      ObservableList list = root.getChildren(); 

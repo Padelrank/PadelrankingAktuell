@@ -13,13 +13,15 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class RegisterPage {
 
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     Connection conn;
+    PreparedStatement pst;
+    Statement st;
+    ResultSet rs;
 
 
     RegisterPage() {
@@ -74,18 +76,42 @@ public class RegisterPage {
         alert.setTitle("Padelrank");
 
         createAccount.setOnMouseClicked(event -> {
-            String firstName = fNamn.getText();
-            String lastName = eNamn.getText();
-            String mailAdress = email.getText();
 
-            String userID = userLogin.getText();
-            String password = pw.getText();
 
-            //boolean ok = controlInput(firstName, lastName, mailAdress, userID, password);
-            if (controlInput(firstName, lastName, mailAdress, userID, password)) {
-                registerUser(firstName, lastName, mailAdress, userID, password);
+            try {
+                String query = "INSERT INTO Användare(AnvändarID, Fnamn, Enamn, Password) VALUES(?,?,?,?)";
+                pst = conn.prepareStatement(query);
+                pst.setString(1, userLogin.getText());
+                pst.setString(2, fNamn.getText());
+                pst.setString(3, eNamn.getText());
+                pst.setString(4, pw.getText());
+
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setTitle("Välkommen");
+                alert.setHeaderText("Välkommen till padelrank " + fNamn.getText());
+                alert.show();
+
+                pst.executeUpdate();
+                pst.close();
+
+
+
+                profilsida pf = new profilsida();
+                pf.showProfilePage(stage);
+
+
+            }catch (SQLException s){
+                System.out.println(s.getErrorCode());
+            }
+
+
+            if (controlInput(fNamn.getText(), eNamn.getText(), email.getText(), userLogin.getText(), pw.getText())) {
+                System.out.println(fNamn.getText() + " " + eNamn.getText() + " " + email.getText() + " " + userLogin.getText() + " " + pw.getText());
+                registerUser(fNamn.getText(), eNamn.getText(),  email.getText(), userLogin.getText(),  pw.getText());
             } else {
                 alert.show();
+                alert.setHeaderText("Alla fält måste vara ifyllda.\n" +
+                        "Var vänlig försök igen.");
             }
 
         });
@@ -119,9 +145,6 @@ public class RegisterPage {
     public boolean controlInput(String fName, String lastName, String eMail, String alias, String password) {
         if ((fName.length() != 0) && (lastName.length() != 0) && (eMail.length() != 0) && (alias.length() != 0)) {
             return kontroll(password);
-        } else {
-            alert.setHeaderText("Alla fält måste vara ifyllda.\n" +
-                    "Var vänlig försök igen.");
         }
         return false;
     }
@@ -168,6 +191,19 @@ public class RegisterPage {
             System.out.println("Connection successful");
         }
 
+    }
+    public boolean checkPrimaryKey(String input){
+        try{
+            String query ="SELECT AnvändarID from Användare where AnvändarID ='" + input + "'";
+            st = conn.createStatement();
+            rs = st.executeQuery(query);
+
+            if (rs.next())
+                return false;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return true;
     }
 
 

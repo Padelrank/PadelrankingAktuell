@@ -7,11 +7,26 @@ public class Person {
     private final SimpleIntegerProperty playerID;
     private final SimpleStringProperty playerName;
     private final SimpleIntegerProperty rankingPoints;
+    private final SimpleIntegerProperty rank;
 
-    public Person(int pID, String pName, int rPoints) {
+    public Person(int rank, int pID, String pName, int rPoints) {
+        this.rank = new SimpleIntegerProperty(rank);
         this.playerID = new SimpleIntegerProperty(pID);
         this.playerName = new SimpleStringProperty(pName);
         this.rankingPoints = new SimpleIntegerProperty(rPoints);
+
+    }
+
+    public int getRank() {
+        return rank.get();
+    }
+
+    public SimpleIntegerProperty rankProperty() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank.set(rank);
     }
 
     public int getPlayerID() {
@@ -37,5 +52,6 @@ public class Person {
     public void setRankingPoints(int rPoints) {
         rankingPoints.set(rPoints);
     }
+
 }
 
